@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing;
 
 
 
@@ -12,46 +13,78 @@ namespace AppLauncher
         public Form1()
         {
             InitializeComponent();
-            this.listView1.AllowDrop = true;
+            this.flowLayoutPanel1.AllowDrop = true;
         }
 
 
 
-        private void LaunchFile(string filePath)
+        private void launch(string path)
         {
             Process p;
 
-            if (File.Exists(filePath))
+            if (File.Exists(path) || Directory.Exists(path))
             {
                 p = new Process();
-                p.StartInfo.FileName = filePath;
+                p.StartInfo.FileName = path;
                 p.StartInfo.UseShellExecute = true;
                 p.Start();
             }
-            else if (Directory.Exists(filePath))
+            else if (Directory.Exists(path))
                 MessageBox.Show("This path is a directory!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show(filePath + " doesn't exist!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(path + " doesn't exist!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
 
-        
-        private void listView1_DragDrop(object sender, DragEventArgs e)
+
+        private void btn_Click(object sender, EventArgs e)
         {
-            Array filePaths;
+            launch(((Button)sender).Tag.ToString());
+        }
+
+
+
+        private void AddButton(string path)
+        {
+            Button btn;
+            Icon icon;
+
+            btn = new Button();
+            btn.Size = new Size(70, 70);
+            btn.UseVisualStyleBackColor = true;
+            btn.Tag = path;
+            btn.Text = Path.GetFileNameWithoutExtension(path);
+            btn.Click += new EventHandler(btn_Click);
+
+            // set alignment
+            btn.TextAlign = ContentAlignment.BottomCenter;
+            btn.ImageAlign = ContentAlignment.TopCenter;
+
+            // add icon image
+            icon = Icon.ExtractAssociatedIcon(path);
+            btn.Image = icon.ToBitmap();
+           
+            flowLayoutPanel1.Controls.Add(btn);
+        }
+
+
+
+        private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
+        {
+            Array paths;
 
             if (e.Data != null)
             {
-                filePaths = (Array)e.Data.GetData(DataFormats.FileDrop);
+                paths = (Array)e.Data.GetData(DataFormats.FileDrop);
 
-                foreach (string filePath in filePaths)
-                    listView1.Items.Add(filePath);
+                foreach (string path in paths)
+                    AddButton(path);
             }
         }
 
 
 
-        private void listView1_DragEnter(object sender, DragEventArgs e)
+        private void flowLayoutPanel1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data != null)
             {
@@ -60,14 +93,6 @@ namespace AppLauncher
                 else
                     e.Effect = DragDropEffects.None;
             }
-        }
-
-
-
-        private void listView1_DoubleClick(object sender, EventArgs e)
-        {
-            string filePath = listView1.FocusedItem.Text;
-            LaunchFile(filePath);
         }
     }
 }
