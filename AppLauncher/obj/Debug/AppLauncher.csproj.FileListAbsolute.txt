@@ -1,0 +1,11 @@
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\AppLauncher.exe.config
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\AppLauncher.exe
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\AppLauncher.pdb
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.csproj.AssemblyReference.cache
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.csproj.SuggestedBindingRedirects.cache
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.Form1.resources
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.Properties.Resources.resources
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.csproj.GenerateResource.cache
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.csproj.CoreCompileInputs.cache
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.exe
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\obj\Debug\AppLauncher.pdb
