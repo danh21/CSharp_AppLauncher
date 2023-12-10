@@ -12,36 +12,13 @@ namespace AppLauncher
         public Form1()
         {
             InitializeComponent();
-            textBox1.AllowDrop = true;
+            this.listView1.AllowDrop = true;
         }
 
 
 
-        private void textBox1_DragEnter(object sender, DragEventArgs e)
+        private void LaunchFile(string filePath)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
-
-
-
-        private void textBox1_DragDrop(object sender, DragEventArgs e)
-        {
-            Array fileNames;
-            string filePath;
-
-            fileNames = (Array)e.Data.GetData(DataFormats.FileDrop);
-            filePath = fileNames.GetValue(0).ToString();
-            textBox1.Text = filePath;
-        }
-
-
-
-        private void openBtn_Click(object sender, EventArgs e)
-        {
-            string filePath = textBox1.Text;
             Process p;
 
             if (File.Exists(filePath))
@@ -52,17 +29,45 @@ namespace AppLauncher
                 p.Start();
             }
             else if (Directory.Exists(filePath))
-            {
                 MessageBox.Show("This path is a directory!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else if (filePath == "")
-            {
-                MessageBox.Show("Please fill the valid path!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             else
-            {
                 MessageBox.Show(filePath + " doesn't exist!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+
+        
+        private void listView1_DragDrop(object sender, DragEventArgs e)
+        {
+            Array filePaths;
+
+            if (e.Data != null)
+            {
+                filePaths = (Array)e.Data.GetData(DataFormats.FileDrop);
+
+                foreach (string filePath in filePaths)
+                    listView1.Items.Add(filePath);
             }
+        }
+
+
+
+        private void listView1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                    e.Effect = DragDropEffects.Copy;
+                else
+                    e.Effect = DragDropEffects.None;
+            }
+        }
+
+
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            string filePath = listView1.FocusedItem.Text;
+            LaunchFile(filePath);
         }
     }
 }
