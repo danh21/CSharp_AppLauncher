@@ -1,5 +1,6 @@
 # Description
-    Tool manages files by drag & drop files to main window of application, click to open file. Tool supplies clear, save, load different configs.
+    Tool manages files by drag & drop files to main window of application, click to open file. 
+    Tool supplies clear, save, load different configs.
     
 # Software
     Microsoft Visual Studio

@@ -12,16 +12,19 @@ namespace AppLauncher
     public partial class Form1 : Form
     {
         string currentCfg;
+        string recentFiles;
 
 
 
         public Form1()
         {
             InitializeComponent();
+            recentFiles = Path.GetDirectoryName(Application.StartupPath + "\\recordRecentFiles.txt\\"); ;
         }
 
 
 
+        // open files in config
         private void launch(string path)
         {
             Process p;
@@ -41,13 +44,7 @@ namespace AppLauncher
 
 
 
-        private void btn_Click(object sender, EventArgs e)
-        {
-            launch(((Button)sender).Tag.ToString());
-        }
-
-
-
+        // add files into config as button-based
         private void AddButton(string path)
         {
             Button btn;
@@ -80,6 +77,8 @@ namespace AppLauncher
                 foreach (Control c in flowLayoutPanel1.Controls)
                     outputFile.WriteLine(c.Tag);
             }
+
+            addToRecentFilesMenu(path);
         }
 
 
@@ -98,16 +97,64 @@ namespace AppLauncher
 
 
 
+        // handler for load button in Files menu
         private void loadCfg(string pathConfig)
         {
             string pathFile;
             currentCfg = pathConfig;
+
+            flowLayoutPanel1.Controls.Clear();
 
             using (StreamReader inputFile = new StreamReader(pathConfig))
             {
                 while ((pathFile = inputFile.ReadLine()) != null)
                     AddButton(pathFile);
             }
+        }
+
+
+
+        void addToRecentFilesMenu(string path)
+        {
+            if (path != null)
+            {
+                // limit 4 files
+                if (recentFilesMenu.DropDownItems.Count > 3)
+                    recentFilesMenu.DropDownItems.RemoveAt(0);
+                recentFilesMenu.DropDownItems.Add(new ToolStripMenuItem(path, null, new EventHandler(cfg_load)));
+            }
+        }
+
+
+
+        void saveRecentFiles(string path)
+        {
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                for (int i = 0; i < recentFilesMenu.DropDownItems.Count; i++)
+                    outputFile.WriteLine(recentFilesMenu.DropDownItems[i].Text);
+            }
+        }
+
+
+
+        void loadRecentFiles(string path)
+        {
+            string cfg;
+
+            using (StreamReader inputFile = new StreamReader(path))
+            {
+                while ((cfg = inputFile.ReadLine()) != null)
+                    addToRecentFilesMenu(cfg);
+            }
+        }
+
+
+
+        // event handler for files in config
+        private void btn_Click(object sender, EventArgs e)
+        {
+            launch(((Button)sender).Tag.ToString());
         }
 
 
@@ -172,9 +219,39 @@ namespace AppLauncher
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                flowLayoutPanel1.Controls.Clear();
                 loadCfg(openFileDialog1.FileName);
+                addToRecentFilesMenu(openFileDialog1.FileName);
             }
+        }
+
+
+
+        // event handler for recent files in menu
+        private void cfg_load(object sender, EventArgs e)
+        {
+            string cfgPath = ((ToolStripMenuItem)sender).Text;
+            FileInfo fi = new FileInfo(cfgPath);
+
+            if (fi.Exists)
+            {
+                loadCfg(cfgPath);
+                currentCfg = cfgPath;
+            }
+        }
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (File.Exists(recentFiles))
+                loadRecentFiles(recentFiles);
+        }
+
+
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            saveRecentFiles(recentFiles);
         }
     }
 }

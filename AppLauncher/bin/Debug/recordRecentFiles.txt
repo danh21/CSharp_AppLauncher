@@ -1,0 +1,4 @@
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg2.txt
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg1.txt
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg4.txt
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg2.txt
