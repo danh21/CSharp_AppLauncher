@@ -15,7 +15,8 @@
     - demo: interface of application
 
 # Demo
-    ![CHEESE!](demo.jpg)
+   ![demo](https://github.com/danh21/CSharp_AppLauncher/assets/106261212/c14dc1cd-538f-4ecc-904a-30e87f6894bb)
+
 
 # Reference
     https://www.udemy.com/course/learn-c-sharp-programming-in-ten-easy-steps/
