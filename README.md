@@ -14,5 +14,8 @@
     - AppLauncher/bin/Debug/recordRecentFiles.txt: save information of configs which were opened in application recently
     - demo: interface of application
 
+# Demo
+    ![My Image](demo.jpg)
+
 # Reference
     https://www.udemy.com/course/learn-c-sharp-programming-in-ten-easy-steps/
