@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -40,7 +41,12 @@
             this.recentFilesMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ctrlItemMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.delItemMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveLeftItemMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveRightItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.ctrlItemMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -91,45 +97,74 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // clearAllToolStripMenuItem
             // 
             this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
             this.clearAllToolStripMenuItem.Text = "Clear All";
             this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // recentFilesMenu
             // 
             this.recentFilesMenu.Name = "recentFilesMenu";
-            this.recentFilesMenu.Size = new System.Drawing.Size(224, 28);
+            this.recentFilesMenu.Size = new System.Drawing.Size(180, 28);
             this.recentFilesMenu.Text = "Recent files";
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // ctrlItemMenu
+            // 
+            this.ctrlItemMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ctrlItemMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.delItemMenu,
+            this.moveLeftItemMenu,
+            this.moveRightItemMenu});
+            this.ctrlItemMenu.Name = "ctrlItemMenu";
+            this.ctrlItemMenu.Size = new System.Drawing.Size(179, 76);
+            this.ctrlItemMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ctrlItemMenu_ItemClicked);
+            // 
+            // delItemMenu
+            // 
+            this.delItemMenu.Name = "delItemMenu";
+            this.delItemMenu.Size = new System.Drawing.Size(178, 24);
+            this.delItemMenu.Text = "Delete";
+            // 
+            // moveLeftItemMenu
+            // 
+            this.moveLeftItemMenu.Name = "moveLeftItemMenu";
+            this.moveLeftItemMenu.Size = new System.Drawing.Size(178, 24);
+            this.moveLeftItemMenu.Text = "<< Move Left";
+            // 
+            // moveRightItemMenu
+            // 
+            this.moveRightItemMenu.Name = "moveRightItemMenu";
+            this.moveRightItemMenu.Size = new System.Drawing.Size(178, 24);
+            this.moveRightItemMenu.Text = "Move Right >>";
             // 
             // Form1
             // 
@@ -146,6 +181,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.ctrlItemMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,6 +200,10 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem recentFilesMenu;
+        private System.Windows.Forms.ContextMenuStrip ctrlItemMenu;
+        private System.Windows.Forms.ToolStripMenuItem delItemMenu;
+        private System.Windows.Forms.ToolStripMenuItem moveLeftItemMenu;
+        private System.Windows.Forms.ToolStripMenuItem moveRightItemMenu;
     }
 }
 

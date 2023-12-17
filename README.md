@@ -1,8 +1,9 @@
 # Description
     Tool manages files by drag & drop files to main window of application, click to open file. 
     Tool supplies clear, save, load different configs.
-    Tool supports recent files menu.
-    
+    Tool supports recent config files menu.
+    Tool can delete and move files in config.
+
 # Software
     Microsoft Visual Studio
 
@@ -15,7 +16,8 @@
     - demo: interface of application
 
 # Demo
-   ![demo](https://github.com/danh21/CSharp_AppLauncher/assets/106261212/c14dc1cd-538f-4ecc-904a-30e87f6894bb)
+   ![demo](demo-fileMenu.jpg)
+   ![demo](demo-itemMenu.png)
 
 
 # Reference

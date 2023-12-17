@@ -19,7 +19,7 @@ namespace AppLauncher
         public Form1()
         {
             InitializeComponent();
-            recentFiles = Path.GetDirectoryName(Application.StartupPath + "\\recordRecentFiles.txt\\"); ;
+            recentFiles = Path.GetDirectoryName(Application.StartupPath + "\\recordRecentFiles.txt\\");
         }
 
 
@@ -64,6 +64,8 @@ namespace AppLauncher
             // add icon image
             icon = Icon.ExtractAssociatedIcon(path);
             btn.Image = icon.ToBitmap();
+
+            btn.ContextMenuStrip = ctrlItemMenu;
            
             flowLayoutPanel1.Controls.Add(btn);
         }
@@ -114,20 +116,22 @@ namespace AppLauncher
 
 
 
-        void addToRecentFilesMenu(string path)
+        private void addToRecentFilesMenu(string path)
         {
             if (path != null)
             {
                 // limit 4 files
                 if (recentFilesMenu.DropDownItems.Count > 3)
                     recentFilesMenu.DropDownItems.RemoveAt(0);
-                recentFilesMenu.DropDownItems.Add(new ToolStripMenuItem(path, null, new EventHandler(cfg_load)));
+
+                if ((recentFilesMenu.DropDownItems.Count == 0) || (recentFilesMenu.DropDownItems[recentFilesMenu.DropDownItems.Count-1].Text != path))
+                    recentFilesMenu.DropDownItems.Add(new ToolStripMenuItem(path, null, new EventHandler(cfg_load)));
             }
         }
 
 
 
-        void saveRecentFiles(string path)
+        private void saveRecentFiles(string path)
         {
             using (StreamWriter outputFile = new StreamWriter(path))
             {
@@ -138,7 +142,7 @@ namespace AppLauncher
 
 
 
-        void loadRecentFiles(string path)
+        private void loadRecentFiles(string path)
         {
             string cfg;
 
@@ -147,6 +151,37 @@ namespace AppLauncher
                 while ((cfg = inputFile.ReadLine()) != null)
                     addToRecentFilesMenu(cfg);
             }
+        }
+
+
+
+        private void deleteBtn(Button btn)
+        {
+            if (flowLayoutPanel1.Controls.Contains(btn))
+            {
+                if (MessageBox.Show("Do you want to delete " + btn.Text + "?", "Remove Button", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    flowLayoutPanel1.Controls.Remove(btn);
+            }
+        }
+
+
+
+        private void moveLeftBtn(Button btn)
+        {
+            int index = flowLayoutPanel1.Controls.GetChildIndex(btn);
+
+            if (index > 0)
+                flowLayoutPanel1.Controls.SetChildIndex(btn, index - 1);
+        }
+
+
+
+        private void moveRightBtn(Button btn)
+        {
+            int index = flowLayoutPanel1.Controls.GetChildIndex(btn);
+
+            if (index < flowLayoutPanel1.Controls.Count-1)
+                flowLayoutPanel1.Controls.SetChildIndex(btn, index + 1);
         }
 
 
@@ -252,6 +287,20 @@ namespace AppLauncher
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             saveRecentFiles(recentFiles);
+        }
+
+
+
+        private void ctrlItemMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Button btn = (Button)ctrlItemMenu.SourceControl;
+
+            if (e.ClickedItem == delItemMenu)
+                deleteBtn(btn);
+            else if (e.ClickedItem == moveLeftItemMenu)
+                moveLeftBtn(btn);
+            else if (e.ClickedItem == moveRightItemMenu)
+                moveRightBtn(btn);
         }
     }
 }
