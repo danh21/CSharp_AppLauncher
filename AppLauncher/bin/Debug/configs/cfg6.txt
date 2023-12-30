@@ -1,3 +1,3 @@
-D:\cd\C#\Project\CSharp_AppLauncher\demo.jpg
 D:\cd\C#\Project\CSharp_AppLauncher\README.md
 D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\Form1.cs
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher

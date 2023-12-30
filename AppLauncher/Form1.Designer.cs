@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +44,7 @@
             this.delItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.moveLeftItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.moveRightItemMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.ctrlItemMenu.SuspendLayout();
             this.SuspendLayout();
@@ -58,16 +58,6 @@
             this.label1.Size = new System.Drawing.Size(255, 26);
             this.label1.TabIndex = 1;
             this.label1.Text = "Drag and drop files here";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AllowDrop = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 78);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(743, 378);
-            this.flowLayoutPanel1.TabIndex = 2;
-            this.flowLayoutPanel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragDrop);
-            this.flowLayoutPanel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel1_DragEnter);
             // 
             // menuStrip1
             // 
@@ -97,40 +87,40 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // clearAllToolStripMenuItem
             // 
             this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
+            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.clearAllToolStripMenuItem.Text = "Clear All";
             this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // recentFilesMenu
             // 
             this.recentFilesMenu.Name = "recentFilesMenu";
-            this.recentFilesMenu.Size = new System.Drawing.Size(180, 28);
+            this.recentFilesMenu.Size = new System.Drawing.Size(224, 28);
             this.recentFilesMenu.Text = "Recent files";
             // 
             // openFileDialog1
@@ -166,12 +156,23 @@
             this.moveRightItemMenu.Size = new System.Drawing.Size(178, 24);
             this.moveRightItemMenu.Text = "Move Right >>";
             // 
+            // mainPanel
+            // 
+            this.mainPanel.AllowDrop = true;
+            this.mainPanel.Location = new System.Drawing.Point(0, 79);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(747, 379);
+            this.mainPanel.TabIndex = 4;
+            this.mainPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.mainPanel_DragDrop);
+            this.mainPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.mainPanel_DragEnter);
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 455);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -189,7 +190,6 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem;
@@ -204,6 +204,7 @@
         private System.Windows.Forms.ToolStripMenuItem delItemMenu;
         private System.Windows.Forms.ToolStripMenuItem moveLeftItemMenu;
         private System.Windows.Forms.ToolStripMenuItem moveRightItemMenu;
+        private System.Windows.Forms.Panel mainPanel;
     }
 }
 

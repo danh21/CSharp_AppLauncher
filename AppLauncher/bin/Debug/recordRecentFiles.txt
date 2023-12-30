@@ -1,4 +1,3 @@
-D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg1.txt
 D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg6.txt
-D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg3.txt
-D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg4.txt
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg5.txt
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin\Debug\configs\cfg1.txt

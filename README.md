@@ -2,7 +2,7 @@
     Tool manages files by drag & drop files to main window of application, click to open file. 
     Tool supplies clear, save, load different configs.
     Tool supports recent config files menu.
-    Tool can delete and move files in config.
+    Tool can delete, move files, drag files in panel.
 
 # Software
     Microsoft Visual Studio
