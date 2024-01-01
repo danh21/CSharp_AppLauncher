@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,20 +43,10 @@
             this.delItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.moveLeftItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.moveRightItemMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainPanel = new System.Windows.Forms.Panel();
+            this.mainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.ctrlItemMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(255, 26);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Drag and drop files here";
             // 
             // menuStrip1
             // 
@@ -67,7 +56,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(747, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(711, 31);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -159,9 +148,10 @@
             // mainPanel
             // 
             this.mainPanel.AllowDrop = true;
-            this.mainPanel.Location = new System.Drawing.Point(0, 79);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 31);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(747, 379);
+            this.mainPanel.Size = new System.Drawing.Size(711, 424);
             this.mainPanel.TabIndex = 4;
             this.mainPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.mainPanel_DragDrop);
             this.mainPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.mainPanel_DragEnter);
@@ -171,9 +161,8 @@
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(747, 455);
+            this.ClientSize = new System.Drawing.Size(711, 455);
             this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -189,7 +178,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem;
@@ -204,7 +192,7 @@
         private System.Windows.Forms.ToolStripMenuItem delItemMenu;
         private System.Windows.Forms.ToolStripMenuItem moveLeftItemMenu;
         private System.Windows.Forms.ToolStripMenuItem moveRightItemMenu;
-        private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.FlowLayoutPanel mainPanel;
     }
 }
 

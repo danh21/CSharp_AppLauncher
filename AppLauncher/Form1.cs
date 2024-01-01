@@ -69,7 +69,6 @@ namespace AppLauncher
             {
                 icon = getIcon(path);
                 btn = CreateButton(path, icon);
-                autoSetPos(btn);
                 mainPanel.Controls.Add(btn);
             }
         }
@@ -129,24 +128,6 @@ namespace AppLauncher
             btn.ContextMenuStrip = ctrlItemMenu;
 
             return btn;
-        }
-
-
-
-        private void autoSetPos(Button b)
-        {
-            int numctrls = mainPanel.Controls.Count;
-
-            if (numctrls > 0)
-            {
-                Button lastBtn = (Button)mainPanel.Controls[numctrls - 1];
-                int lastX = lastBtn.Location.X;
-                b.Location = new Point(lastX + lastBtn.Width + 10, lastBtn.Location.Y);
-            }
-            else
-            {
-                b.Location = new Point(10, 10);
-            }
         }
         #endregion
 
@@ -259,6 +240,7 @@ namespace AppLauncher
         {
             if (Control.ModifierKeys == Keys.Control)
             {
+                mainPanel.SuspendLayout();
                 dragging = true;
                 x_Org = e.Location.X;
                 y_Org = e.Location.Y;
@@ -269,6 +251,7 @@ namespace AppLauncher
 
         private void MouseUp(object sender, MouseEventArgs e)
         {
+            mainPanel.ResumeLayout();
             dragging = false;
         }
 
@@ -407,12 +390,17 @@ namespace AppLauncher
         {
             if (path != null)
             {
+                for (int i = 0; i < recentFilesMenu.DropDownItems.Count; i++)
+                {
+                    if (recentFilesMenu.DropDownItems[i].Text == path)
+                        recentFilesMenu.DropDownItems.RemoveAt(i);
+                }
+
                 // limit 4 files
                 if (recentFilesMenu.DropDownItems.Count > 3)
                     recentFilesMenu.DropDownItems.RemoveAt(0);
 
-                if ((recentFilesMenu.DropDownItems.Count == 0) || (recentFilesMenu.DropDownItems[recentFilesMenu.DropDownItems.Count-1].Text != path))
-                    recentFilesMenu.DropDownItems.Add(new ToolStripMenuItem(path, null, new EventHandler(cfg_load)));
+                recentFilesMenu.DropDownItems.Add(new ToolStripMenuItem(path, null, new EventHandler(cfg_load)));   
             }
         }
 

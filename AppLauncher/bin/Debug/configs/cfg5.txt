@@ -1,0 +1,2 @@
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\bin
+D:\cd\C#\Project\CSharp_AppLauncher\AppLauncher\Form1.Designer.cs
