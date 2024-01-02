@@ -3,7 +3,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
-using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 
 
 
@@ -21,12 +22,36 @@ namespace AppLauncher
 
 
 
+        #region Form
         public Form1()
         {
             InitializeComponent();
             recentFiles = Path.GetDirectoryName(Application.StartupPath + "\\recordRecentFiles.txt\\");
             dragging = false;
         }
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            loadSettings();
+            if (File.Exists(recentFiles))
+                loadRecentFiles(recentFiles);
+        }
+
+
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            saveRecentFiles(recentFiles);
+
+            saveSetting("xLocForm", this.Location.X.ToString());
+            saveSetting("yLocForm", this.Location.Y.ToString());
+            saveSetting("widthForm", this.Width.ToString());
+            saveSetting("heightForm", this.Height.ToString());
+            saveSetting("defaultCfg", currentCfg);
+        }
+        #endregion
 
 
 
@@ -371,21 +396,6 @@ namespace AppLauncher
 
 
         #region handle recent files menu
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            if (File.Exists(recentFiles))
-                loadRecentFiles(recentFiles);
-        }
-
-
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            saveRecentFiles(recentFiles);
-        }
-
-
-
         private void addToRecentFilesMenu(string path)
         {
             if (path != null)
@@ -440,6 +450,61 @@ namespace AppLauncher
             {
                 loadCfg(cfgPath);
                 currentCfg = cfgPath;
+            }
+        }
+        #endregion
+
+
+
+        #region app settings
+        void loadSettings()
+        {
+            try
+            {
+                NameValueCollection appSettings = ConfigurationManager.AppSettings;
+
+                string xLocForm = appSettings["xLocForm"] ?? "";
+                string yLocForm = appSettings["yLocForm"] ?? "";
+                string widthForm = appSettings["widthForm"] ?? "";
+                string heightForm = appSettings["heightForm"] ?? "";
+                string defaultCfg = appSettings["defaultCfg"] ?? "";
+
+                if ((xLocForm != "") && (yLocForm != ""))
+                    this.Location = new Point(Int32.Parse(xLocForm), Int32.Parse(yLocForm));
+                if (widthForm != "")
+                    this.Width = Int32.Parse(widthForm);
+                if (heightForm != "")
+                    this.Height = Int32.Parse(heightForm);
+                if (defaultCfg != "")
+                    loadCfg(defaultCfg);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading settings");
+            }
+        }
+
+
+
+        void saveSetting(string key, string value)
+        {
+            try
+            {
+                Configuration configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                KeyValueConfigurationCollection settings = configFile.AppSettings.Settings;
+
+                if (settings[key] == null)
+                    settings.Add(key, value);
+                else
+                    settings[key].Value = value;
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing settings");
             }
         }
         #endregion
